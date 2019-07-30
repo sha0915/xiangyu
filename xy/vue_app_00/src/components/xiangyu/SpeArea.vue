@@ -2,25 +2,25 @@
 <div>
    <div class="area flex_around">
       <div id="home">
-         <div id="home-img">
+         <div id="home-img"  @click="rent_sharing">
             <img style="width:100%;height:100%;" src="../../assets/little/home_img.png">
          </div>
          <span>HOME整租</span>
       </div>
       <div  id="room">
-         <div id="room-img">
+         <div id="room-img" @click="rent_sharing">
             <img style="width:100%;height:100%;" src="../../assets/little/room_img.png">
          </div>
          <span>ROOM合租</span>
       </div>
       <div  id="park">
-         <div id="park-img">
+         <div id="park-img" @click="more">
             <img style="width:100%;height:100%;" src="../../assets/little/park_img.png">         
          </div>
          <span>PARK公寓</span>
       </div>
       <div  id="inni">
-         <div id="inni-img">
+         <div id="inni-img"  @click="rent_sharing">
             <img style="width:100%;height:100%;" src="../../assets/little/inni_img.png">
          </div>
          <span>INNI酒店</span>
@@ -55,7 +55,19 @@
 </div>
 </template>
 <script>
-   
+   export default{
+      data(){
+         return {}
+      },
+      methods:{
+         more(){
+            this.$router.push("/park02");
+         },
+         rent_sharing(){
+            this.$router.push("/rent_sharing")
+         }
+      }
+   }
 </script>
 <style>@import '../css/common.css';</style>
 <style scoped>

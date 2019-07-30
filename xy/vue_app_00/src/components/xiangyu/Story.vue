@@ -17,10 +17,10 @@ export default {
    data(){
       return {
          list:[
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"租客猫猫：有趣的灵魂在这里"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"北票十年，最后嫁给了那个帮我找到房子的男生……"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"今天，她们要公开自己的人生大事!"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"生活就像一盒巧克力，要努力找到最好吃的那颗！"},
+            {"imgurl":require("../../assets/pic/img.jpg"),"stitle":"租客猫猫：有趣的灵魂在这里"},
+            {"imgurl":require("../../assets/pic/marrybanner.jpg"),"stitle":"北票十年，最后嫁给了那个帮我找到房子的男生……"},
+            {"imgurl":require("../../assets/pic/lifebanner-1.jpg"),"stitle":"今天，她们要公开自己的人生大事!"},
+            {"imgurl":require("../../assets/pic/index_life_img2.png"),"stitle":"生活就像一盒巧克力，要努力找到最好吃的那颗！"},
          ]
       }
    }

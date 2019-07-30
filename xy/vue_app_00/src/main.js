@@ -10,6 +10,10 @@ import MintUI from 'mint-ui'
 import'mint-ui/lib/style.css'
 //3.将mint-ui注册Vue
 Vue.use(MintUI);
+
+import { Popup } from 'vant';
+Vue.use(Popup);
+
 //5.引入axios。js文件
 import axios from './axios'
 //6.引入vuex

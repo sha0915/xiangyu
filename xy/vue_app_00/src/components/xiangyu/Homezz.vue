@@ -1,14 +1,15 @@
 <template>
 <div class="homezz">
-   <span class="title_font">相寓ROOM · 合租</span>
+   <span class="title_font">相寓ROOM · 整租</span>
    <div id="rezu">
-      <div id="cmar" class="flex_around" :class="this.show ? 'cmarg' : ''">
+      <div id="cmar" class="flex_around">
          <div v-for="(item,i) in list" :key="i">
             <img :src="item.imgurl">
             <div>
                <div class="lit_font">{{item.stitle}}</div>
                <span class="little_text"  v-text="item.desc"></span>
             </div>
+            <div class="lab little_tag">{{item.lab}}</div>
          </div>
       </div>
    </div>
@@ -22,10 +23,10 @@ export default {
    data(){
       return {
          list:[
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"你的独立日","desc":"一人畅享 拒绝束缚"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"就爱宅一起","desc":"生活相伴 完整体验"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"都市幸福家","desc":"温暖时刻 欢乐满屋"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"美好租家生活","desc":"宽敞通透 尽情挥洒"},
+            {"imgurl":require("../../assets/pic/park03.png"),"stitle":"你的独立日","desc":"一人畅享 拒绝束缚","lab":"一居"},
+            {"imgurl":require("../../assets/pic/meefkigf94d682fa.jpg"),"stitle":"就爱宅一起","desc":"生活相伴 完整体验","lab":"两居"},
+            {"imgurl":require("../../assets/pic/dyfj20.jpg"),"stitle":"都市幸福家","desc":"温暖时刻 欢乐满屋","lab":"三居"},
+            {"imgurl":require("../../assets/pic/index_park_bj63k.png"),"stitle":"美好租家生活","desc":"宽敞通透 尽情挥洒","lab":"四居"},
          ],
       }
    },
@@ -45,6 +46,7 @@ export default {
    flex-direction:column;
    width:48%;
    height:140px;
+   position:relative;
 }
 .homezz .flex_around>div img{
    margin:0 auto;
@@ -54,6 +56,12 @@ export default {
 }
 .homezz .flex_around>div>div{
    padding:10px 0 0 10px;
+}
+.homezz .flex_around .lab{
+   position:absolute;
+   top:12px;
+   left:18px;
+   padding:2px 5px;
 }
 .homezz .btm{
    padding:10px 10px;

@@ -3,7 +3,7 @@
    <span class="title_font">相寓ROOM · 合租</span>
    <div id="rezu">
       <div id="cmar" class="flex_around" :class="this.show ? 'cmarg' : ''">
-         <div v-for="(item,i) in list" :key="i">
+         <div v-for="(item,i) in list" :key="i"  @click="rent_sharing">
             <img :src="item.imgurl">
             <div>
                <div class="lit_font">热租商圈 | {{item.stitle}}</div>
@@ -14,7 +14,7 @@
    </div>
    <div class="btm">
       <div class="btn small_font">
-         <span>更多合租</span>
+         <span @click="rent_sharing">更多合租</span>
          <span>
             <img style="width:8%;padding-bottom:-10px;"src="../../assets/little/gt.png">
          </span>
@@ -33,14 +33,14 @@ export default {
    data(){
       return {
          list:[
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"回龙观","desc":"互联网从业者的首选"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"CBD","desc":"精彩不断 乐享生活"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"北苑","desc":"科技新贵 美食遍地"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"立水桥","desc":"亚洲最大生活社区"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"西三旗","desc":"互联网从业者首选"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"天通苑","desc":"科技新贵 精彩不断"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"朝阳大悦城","desc":"精彩不断 美食遍地"},
-            {"imgurl":require("../../assets/pic/joinus-img1.png"),"stitle":"望京","desc":"科技新贵 乐享生活"},
+            {"imgurl":require("../../assets/pic/xdzb16.jpg"),"stitle":"回龙观","desc":"互联网从业者的首选"},
+            {"imgurl":require("../../assets/pic/pgzb2.jpg"),"stitle":"北苑","desc":"科技新贵 美食遍地"},
+            {"imgurl":require("../../assets/pic/leisure1-1.png"),"stitle":"CBD","desc":"精彩不断 乐享生活"},
+            {"imgurl":require("../../assets/pic/leisure1.png"),"stitle":"立水桥","desc":"亚洲最大生活社区"},
+            {"imgurl":require("../../assets/pic/hmzb2.jpg"),"stitle":"西三旗","desc":"互联网从业者首选"},
+            {"imgurl":require("../../assets/pic/leisure1-1.png"),"stitle":"天通苑","desc":"科技新贵 精彩不断"},
+            {"imgurl":require("../../assets/pic/pgzb1.jpg"),"stitle":"朝阳大悦城","desc":"精彩不断 美食遍地"},
+            {"imgurl":require("../../assets/pic/hmzb3.jpg"),"stitle":"望京","desc":"科技新贵 乐享生活"},
          ],
          show:false
       }
@@ -53,6 +53,9 @@ export default {
          }else{
             this.show = false;
          }
+      },
+      rent_sharing(){
+            this.$router.push("/rent_sharing")
       }
    }
 }
