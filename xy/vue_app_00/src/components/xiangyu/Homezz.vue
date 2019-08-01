@@ -3,8 +3,8 @@
    <span class="title_font">相寓ROOM · 整租</span>
    <div id="rezu">
       <div id="cmar" class="flex_around">
-         <div v-for="(item,i) in list" :key="i">
-            <img :src="item.imgurl">
+         <div v-for="(item,i) in list" :key="i"  >
+            <img :src="item.imgurl" @click="change" :data-name="item.name">
             <div>
                <div class="lit_font">{{item.stitle}}</div>
                <span class="little_text"  v-text="item.desc"></span>
@@ -23,14 +23,35 @@ export default {
    data(){
       return {
          list:[
-            {"imgurl":require("../../assets/pic/park03.png"),"stitle":"你的独立日","desc":"一人畅享 拒绝束缚","lab":"一居"},
-            {"imgurl":require("../../assets/pic/meefkigf94d682fa.jpg"),"stitle":"就爱宅一起","desc":"生活相伴 完整体验","lab":"两居"},
-            {"imgurl":require("../../assets/pic/dyfj20.jpg"),"stitle":"都市幸福家","desc":"温暖时刻 欢乐满屋","lab":"三居"},
-            {"imgurl":require("../../assets/pic/index_park_bj63k.png"),"stitle":"美好租家生活","desc":"宽敞通透 尽情挥洒","lab":"四居"},
+            {"imgurl":require("../../assets/pic/park03.png"),"stitle":"你的独立日","desc":"一人畅享 拒绝束缚","lab":"一居","id":1,"name":"whole_rent1"},
+            {"imgurl":require("../../assets/pic/meefkigf94d682fa.jpg"),"stitle":"就爱宅一起","desc":"生活相伴 完整体验","lab":"两居","id":2,"name":"whole_rent2"},
+            {"imgurl":require("../../assets/pic/dyfj20.jpg"),"stitle":"都市幸福家","desc":"温暖时刻 欢乐满屋","lab":"三居","id":3,"name":"whole_rent3"},
+            {"imgurl":require("../../assets/pic/index_park_bj63k.png"),"stitle":"美好租家生活","desc":"宽敞通透 尽情挥洒","lab":"四居","id":4,"name":"whole_rent4"},
          ],
+         rent:"",
+         whole:[]
+        
       }
    },
    methods:{
+       change(e){
+           this.rent=e.target.dataset.name;
+           var rent=this.rent;
+            console.log(rent)
+           var url="rent";
+           var obj={rent:rent}
+           //console.log(obj)
+           this.axios.get(url,{params:obj}).then(result=>{
+               //console.log(result);
+                this.whole=result.data.data;
+               // console.log(this.whole);
+                var a=this.whole;
+               a=JSON.stringify(a)
+               //console.log(a);
+                sessionStorage.setItem("whole",a)
+                this.$router.push("/rent_sharing")
+           })
+       }
    }
 }
 </script>

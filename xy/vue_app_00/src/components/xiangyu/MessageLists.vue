@@ -89,6 +89,7 @@
     </div>
 </template>
 <script>
+
     export default{
         props:{
              title:{default:"消息中心"},
@@ -115,7 +116,8 @@
             return {
 
             }
-        }
+        },
+
     }
 </script>
 <style>

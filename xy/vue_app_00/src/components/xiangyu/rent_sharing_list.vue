@@ -1,14 +1,16 @@
 <template>
-    <div ref="wrapper" :style="{ height: (wrapperHeight-10) + 'px' }">
-       
+    <div>
+    <adress></adress>
+    <div ref="wrapper" :style="{ height: (wrapperHeight-10) + 'px' }" id="d1" style="padding-top:50px;">
         <!--合租list-->
          <mt-loadmore :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore" :autoFill="isAutoFill">
-            <div v-for="(item,i) of list":key="i" class="flex_around list">
-                <img :src="`http://127.0.0.1:3000/img/`+item.img_url1" class="repeat">
+            <div v-for="(item,i) of whole":key="i" v-if="i<=index-1" class="flex_between list"  >
+            <div class="zhezhao" @click="detail" :id="i"></div>
+                <img :src="`http://127.0.0.1:3000/img/`+item.img_url0" class="repeat" >
                 <div style="width:199.55px;">
                     <!--title-->
                     <div class="lit_font">
-                        <span v-text="item.rent_share"></span> <span>|</span> <span v-text="item.village"></span><span v-text="item.bedroom"></span>
+                        <span v-text="item.rent_who"></span> <span>|</span> <span v-text="item.village"></span><span v-text="item.bedroom"></span>
                     </div>
                     <!--where-->
                     <div>
@@ -27,48 +29,46 @@
                         </div>
                         <div>
                             <span class="little_text">{{item.housetype}} | {{item.area}}m²</span>
-                            <!--户型 平米 朝向-<span v-if="item.orient!='--'" class="little_text"> | {{item.orient}}</span>-->
+                            
                         </div>
-                        
+                        <!--户型 平米 朝向-->
                     </div>
                 </div>
             </div>
          </mt-loadmore>
-        <!--推荐-->
+        <!--推荐
         <div class="tuijian" id="searchBar">
-            <img src="../resource/star.png">
+            <img src="../../assets/resource/star.png">
             <span class="small_font">推荐</span>
-        </div>
+        </div>-->
+    </div>
     </div>
 </template>
 <script>
+    import adress from "./adress.vue";
     export default {
         data(){
             return{
-                list:[],
-                pno:0,
-                ps:5,
                 has_log:0,
                 allLoaded:false,//可以进行上拉
                 isAutoFill:false,//是否自动触发上拉函数
                 wrapperHeight:0,
-                courrentPage:0
+                courrentPage:0,
+                whole:[],
+                list:[],
+                index:5,
+
             }
         },
         created(){
-            //this.loadFrist();
-                var url="rentShare";
-                this.pno++;
-                var obj={pno:this.pno,pageSize:this.ps}
-                this.axios.get(url,{params:obj}).then(result=>{
-                    //console.log(result);
-                    var lists=this.list.concat(result.data.data);
-                    this.list=lists;
-                })
+            var whole=sessionStorage.getItem("whole");
+            this.whole=JSON.parse(whole)
+            console.log(this.whole)
         },
         mounted(){
-             window.addEventListener('scroll', this.handleScroll);
-             this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top;
+            //给window添加一个滚动监听事件
+             /*window.addEventListener('scroll', this.handleScroll);
+             this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top; */
         },
         methods:{
             //下拉刷新
@@ -76,55 +76,78 @@
                 this.loadFrist()
             },*/
             //上拉加载
+            detail(e){
+                console.log(e.target.id)
+                console.log(this.whole)
+                this.list=this.whole[e.target.id];
+                console.log(this.list)
+                var detail=this.list;
+                 detail=JSON.stringify(detail)
+                sessionStorage.setItem("detail",detail)
+                this.$router.push("/details")
+            },
             loadBottom(){
-                this.loadMore()
+                this.loadMore();
+                 this.$refs.loadmore.onBottomLoaded();
             },
             //下拉刷新加载
             loadMore(){
-                var url="rentShare";
-                this.pno++;
-                var obj={pno:this.pno,pageSize:this.ps}
-                this.axios.get(url,{params:obj}).then(result=>{
-                    //console.log(result);
-                    var lists=this.list.concat(result.data.data);
-                    if(this.pno>4){
-                        this.allLoaded =true;//若数据以获取完毕
-                    }
-                   this.$refs.loadmore.onBottomLoaded();
-                    this.list=lists;
-                })
+                if(this.index<this.whole.length){
+                    this.index+=3;
+                }else{
+                    this.index>=this.whole.length;
+                    this.allLoaded=true;
+                };
             },
-            handleScroll(){//给window添加一个滚动监听事件
+           
+           /* handleScroll(){//给window添加一个滚动监听事件
                 var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                
                 var offsetTop =document.querySelector("#searchBar").offsetTop;
-                if(scrollTop<=1000){
-                    offsetTop =50 -Number(scrollTop);
+                //console.log(document.querySelector("#searchBar").offsetTop)
+                if(scrollTop<=100){
+                    offsetTop =15 -Number(scrollTop);
                     document.querySelector('#searchBar').style.bottom = offsetTop+'px';
                 }else{
-                    document.querySelector('#searchBar').style.bottom = '25px';
+                    document.querySelector('#searchBar').style.bottom = '5px';
                 }
-            }
+                
+            }*/
+            
+            
+        },
+        components:{
+            "adress":adress
         }
+        
     }
 </script>
 <style>
     @import '../css/common.css';
 </style>
 <style scoped>
-    .little_text{
-        margin:5px 0;
-    }
+    
     .list{
         border-bottom:1px solid #efefef;
-        height:130px;
+        padding:10px 0;
+        height:140px;
+        position:relative;
     }
-    .flex_around .repeat{
-        width:35%;
-        height:74%;
+    .list  .zhezhao{
+        position:absolute;
+        width:100%;
+        height:100%;
+        opacity:0;
+        top:0;
+        left:0;
+    }
+    .flex_between .repeat{
+        width:140px;
+        height:120px;
         vertical-align:top;
         border-radius:3px;
     }
-    .flex_around .lit_font>span{
+    .flex_between .lit_font>span{
         margin-right:10px;
         font-weight:bold
     }
@@ -146,7 +169,7 @@
     }
     .tuijian{
         position:absolute;
-        bottom:35px;
+        bottom:25px;
         right:8px;
         width:60px;
         height:60px;
@@ -164,5 +187,7 @@
     .tuijian>.small_font{
         color:#fff;
     }
-
+    .mint-loadmore{
+        height:100%;
+    }
 </style>

@@ -3,8 +3,8 @@
    <span class="title_font">相寓ROOM · 合租</span>
    <div id="rezu">
       <div id="cmar" class="flex_around" :class="this.show ? 'cmarg' : ''">
-         <div v-for="(item,i) in list" :key="i"  @click="rent_sharing">
-            <img :src="item.imgurl">
+         <div v-for="(item,i) in list" :key="i" >
+            <img :src="item.imgurl" @click="rent_list" :data-name="item.stitle">
             <div>
                <div class="lit_font">热租商圈 | {{item.stitle}}</div>
                <span class="little_text"  v-text="item.desc"></span>
@@ -56,6 +56,21 @@ export default {
       },
       rent_sharing(){
             this.$router.push("/rent_sharing")
+      },
+      rent_list(e){
+            var local=e.target.dataset.name;
+            console.log(local)
+            var url="rent_share";
+            local=JSON.stringify(local);
+            var obj={local:local}
+            this.axios.get(url,{params:obj}).then(result=>{
+                  this.rent=result.data.data;
+                  var rent=this.rent;
+                  console.log(rent)
+                  rent=JSON.stringify(rent);
+                  sessionStorage.setItem("whole",rent)
+                  this.$router.push("/rent_sharing")
+            })
       }
    }
 }

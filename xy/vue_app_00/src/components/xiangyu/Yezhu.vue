@@ -3,10 +3,7 @@
    <div class="title flex_between">
       <div class="kong"></div>
       <div>业主委托</div>
-      <van-button @click="sharing"><span><img src="../../assets/little/sharing.png"></span></van-button>
-      <van-popup round v-model="show" style="width:200px;height:200px;">
-            要分享吗?
-      </van-popup>
+      <span><img src="../../assets/little/sharing.png"></span>
    </div>
    <div id="im">
       <img id="pn" src="../../assets/pic/4-3.png">

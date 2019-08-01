@@ -3,17 +3,18 @@
         <!--页头 切换为业主-->
         <div class="fixed flex_between">
             <div>
-                <img src="../resource/jiaohuan.png">
+                <img src="../../assets/resource/jiaohuan.png">
                 <p>切换为业主</p>
             </div>
             <div>
-                <img src="../resource/kefu.png">
+                <img src="../../assets/resource/kefu.png">
             </div>
         </div>
         <!--登录注册 -->
         <div class="flex_between">
             <div class="flex_login">
-                <p><span @click="login">登录</span>/<span>注册</span></p>
+                <p v-if="session==0"><span @click="login">登录</span>/<span>注册</span></p>
+                <p v-else><span v-model="user">{{user}}</span></p>
                 <p>点击编辑个人资料</p>
             </div>
             <div class="flex_avatar">
@@ -24,25 +25,25 @@
         <div class="flex_around">
             <div class="flex_tab">
                 <div>
-                    <img src="../resource/renzheng.png">
+                    <img src="../../assets/resource/renzheng.png">
                 </div>
                 <p>我的认证</p>
             </div>
             <div class="flex_tab">
-                <div>
-                    <img src="../resource/guanzhu.png">
+                <div @click="guanzhu">
+                    <img src="../../assets/resource/guanzhu.png">
                 </div>
                 <p>我的关注</p>
             </div>
             <div class="flex_tab">
                 <div>
-                    <img src="../resource/yuekan.png">
+                    <img src="../../assets/resource/yuekan.png">
                 </div>
                 <p>我的约看</p>
             </div>
             <div class="flex_tab">
                 <div>
-                    <img src="../resource/hongbao.png">
+                    <img src="../../assets/resource/hongbao.png">
                 </div>
                 <p>我的红包</p>
             </div>
@@ -96,19 +97,31 @@
         data(){
             return{
                 list:[
-                    {pic:require('../resource/hetong.png'),name:"我的合同",src:"hetong"},
-                    {pic:require("../resource/mensuo.png"),name:"智能锁门",src:"suomen"},
-                    {pic:require("../resource/baoxiu.png"),name:"在线报销",src:"baoxiao"},
-                    {pic:require("../resource/dingdan.png"),name:"我的订单",src:"dingdan"},
-                ]
+                    {pic:require('../../assets/resource/hetong.png'),name:"我的合同",src:"hetong"},
+                    {pic:require("../../assets/resource/mensuo.png"),name:"智能锁门",src:"suomen"},
+                    {pic:require("../../assets/resource/baoxiu.png"),name:"在线报销",src:"baoxiao"},
+                    {pic:require("../../assets/resource/dingdan.png"),name:"我的订单",src:"dingdan"},
+                ],
+                session:0,
+                user:''
             }
         },
         created() {
-             console.log(sessionStorage.getItem("uname"));
+            var url="mypage"
+            this.axios.get(url).then(result=>{
+               if(result.data.code>0){
+                    this.session=1;
+                    this.user=result.data.user;
+                    //console.log(result)
+                }
+            })
         },
         methods:{
             login(){
                 this.$router.push("/login")
+            },
+            guanzhu(){
+                this.$router.push("/guanzhu")
             }
         }
     }
@@ -179,7 +192,7 @@
         border-radius:50%;
         width:65px;
         height:65px;
-        background-image:url("../resource/03.png");
+        background-image:url("../../assets/resource/03.png");
         background-repeat:no-repeat;
         background-size:100px 100px;
         margin-top:40px;

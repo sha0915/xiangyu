@@ -54,3 +54,12 @@ new Vue({
   render: h => h(App),
   store
 }).$mount('#app')
+
+import { DropdownMenu, DropdownItem } from 'vant';
+Vue.use(DropdownMenu).use(DropdownItem);
+import 'vant/lib/dropdown-menu/style';
+import 'vant/lib/dropdown-item/style';
+
+import { TreeSelect } from 'vant';
+Vue.use(TreeSelect);
+import 'vant/lib/tree-select/style';

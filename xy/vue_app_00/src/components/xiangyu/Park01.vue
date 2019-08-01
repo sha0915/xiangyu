@@ -41,7 +41,7 @@
                 <div class="periph">
                     <span class="little_text">这里，紧邻“中国传媒界最高学府”——中国传媒大学，学院温情四处洋溢，才子佳人川流如织；通惠河的晚霞 如诗如画，欣欣然伴随你每日的归途，何不来这里寻找闹市旁遗世独立的美丽静谧？</span>
                 </div>
-            <!--floor4-->
+            <!--floor4贴心服务-->
                 <div class="serve">
                     <span>贴心服务</span>
                 </div>
@@ -52,18 +52,97 @@
                         <p>公共区域</p>
                     </div>
                      <div class="box">
-                        <img src="../../assets/park/jiaju.png" style="width:25px;">
-                        <span>160m²公共区域</span>
+                        <img src="../../assets/park/huxing.png" style="width:25px;">
+                        <p>户型方正</p>
+                        <p>独立阳台</p>
                     </div>
                      <div class="box">
-                        <img src="../../assets/park/jiaju.png" style="width:25px;">
-                        <span>160m²公共区域</span>
+                        <img src="../../assets/park/button.png" style="width:25px;">
+                        <p>优质家电</p>
+                        <p>智能门锁</p>
                     </div>
                      <div class="box">
-                        <img src="../../assets/park/jiaju.png" style="">
-                        <span>160m²公共区域</span>
+                        <img src="../../assets/park/guangxian.png" style="width:25px;">
+                        <p>免费联通</p>
+                        <p>光纤入户</p>
+                    </div>
+                     <div class="box">
+                        <img src="../../assets/park/huxing.png" style="width:25px;">
+                        <p>24h</p>
+                        <p>快递柜</p>
+                    </div>
+                     <div class="box">
+                        <img src="../../assets/park/mianfei.png" style="width:25px;">
+                        <p>服务中介</p>
+                        <p>费用全免</p>
+                    </div>
+                     <div class="box">
+                        <img src="../../assets/park/xingxing.png" style="width:25px;">
+                        <p>安保管家</p>
+                        <p>贴心服务</p>
+                    </div>
+                     <div class="box">
+                        <img src="../../assets/park/shijian.png" style="width:25px;">
+                        <p>一月起租</p>
+                        <p>随看随住</p>
                     </div>
                 </div>
+            <!--floor5公共设施-->
+                <div class="serve sheshi">
+                    <span>公共设施</span>
+                </div>
+                <div class="info info-detail">
+                    <div class="detail">
+                        <div class="box">
+                            <div class="imgbox">
+                                <img src="../../assets/park/jianshen.png" style="width:25px;">
+                            </div>
+                            <p>健身房</p>
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <div class="box">
+                            <div class="imgbox">
+                                <img src="../../assets/park/taiqiu.png" style="width:25px;">
+                            </div>
+                            <p>台球</p>
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <div class="box">
+                            <div class="imgbox">
+                                <img src="../../assets/park/shuba.png" style="width:25px;">
+                            </div>
+                            <p>书吧</p>
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <div class="box">
+                            <div class="imgbox">
+                                <img src="../../assets/park/xiuxian.png" style="width:25px;margin-left:3px;margin-top:6px;">
+                            </div>
+                            <p>休闲</p>
+                        </div>
+                    </div>
+                    <div class="detail">
+                        <div class="box">
+                            <div class="imgbox">
+                                <img src="../../assets/park/huatong.png" style="width:25px;margin-left:6px;">
+                            </div>
+                            <p>话筒</p>
+                        </div>
+                    </div>
+                </div>
+            <!--floor7周边环境-->
+                <div class="serve zhoubian">
+                    <span>周边环境</span>
+                </div>
+                <div class="text">
+                    <p>地铁:{{item.metro}}</p>
+                    <p>公交:{{item.transit}}</p>
+                    <p> 生活周边:{{item.periph}}</p>
+                </div>
+                <img src="../../assets/park/ditu.jpg" style="width:350px;height:250px;">
             </div> <!--main结尾-->
             <!--尾部-->
             <div class="page-tail">

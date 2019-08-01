@@ -30,6 +30,41 @@ const session = require("express-session");
 
  server.listen(3000);
  
+ //查询页面中添加 历史记录
+server.get("/lookup",(req,res)=>{
+  //1:参数
+  //var uid=req.session.uid;
+  var hname = req.query.hname;
+  //1.1:正则表达式验证用户名或密码
+  //2:sql
+var sql = " INSERT INTO history VALUES(null,?) ";
+
+  //3:json
+  pool.query(sql,[hname],(err,result)=>{
+      if(err)throw err;
+      if(result.length>0){
+         res.send({code:1,msg:"插入成功"});
+      }
+  })
+})
+
+//查找history数据并加载到页面中 
+server.get("/addhistory",(req,res)=>{
+  //1:参数
+  //var uid=req.session.uid;
+  //var hname = req.query.hname;
+  //1.1:正则表达式验证用户名或密码
+  //2:sql
+var sql = "SELECT * from history";
+  //3:json
+  pool.query(sql,(err,result)=>{
+      if(err)throw err;
+      if(result.length>0){
+         res.send({code:1,data:result});
+      }
+  })
+});
+
 //3:完成第一个功能用户登录
 server.get("/login",(req,res)=>{
   //1:参数
@@ -52,23 +87,7 @@ sql +=" AND upwd = md5(?)";
       }
   })
 })
-//查询页面中添加 历史记录
-server.get("/lookup",(req,res)=>{
-  //1:参数
-  //var uid=req.session.uid;
-  var hname = req.query.hname;
-  //1.1:正则表达式验证用户名或密码
-  //2:sql
-var sql = " INSERT INTO history VALUES(null,?) ";
 
-  //3:json
-  pool.query(sql,[hname],(err,result)=>{
-      if(err)throw err;
-      if(result.length>0){
-         res.send({code:1,msg:"插入成功"});
-      }
-  })
-})
 //删除历史记录
 server.get("/del",(req,res)=>{
   var sql = "DELETE FROM history";
@@ -80,52 +99,79 @@ server.get("/del",(req,res)=>{
     }
   })
 })
-//查找history数据并加载到页面中 
-server.get("/addhistory",(req,res)=>{
-  //1:参数
-  //var uid=req.session.uid;
-  //var hname = req.query.hname;
-  //1.1:正则表达式验证用户名或密码
-  //2:sql
-var sql = "SELECT * from history";
-  //3:json
+//整租租房列表页面
+server.get("/rent",(req,res)=>{
+  var rent=req.query.rent;
+  var sql="SELECT * FROM "+rent;
   pool.query(sql,(err,result)=>{
-      if(err)throw err;
-      if(result.length>0){
-         res.send({code:1,data:result});
-      }
-  })
-});
-//合租列表页面
-server.get("/rentShare",(req,res)=>{
-  var pno=req.query.pno;
-  var ps=req.query.pageSize;
-  if(!pno){pno=1}
-  if(!ps){ps=5}
-  var sql="SELECT * FROM rent_sharing LIMIT ?,?";
-  var offset=(pno-1)*ps;
-  ps=parseInt(ps);
-  pool.query(sql,[offset,ps],(err,result)=>{
     if(err) throw err;
     if(result.length>0){
-      req.session.sid=result[0].sid;
-     // res.send({code:1,data:result});
+      res.send({code:1,data:result})
     }
-    var obj= {code:1,msg:"查询成功",data:result}
-    obj.data=result;
-    var sql="SELECT count(*) AS c FROM rent_sharing";
-    pool.query(sql,(err,result)=>{
-      if(err) throw err;
-      var pc= Math.ceil(result[0].c/ps);
-      obj.pc=pc;
-      res.send(obj);
-    })
-    
   })
-});
+})
+//tarbar消息
+server.get("/msg",(req,res)=>{
+  var uid=req.session.uid;
+  if(!uid){
+    res.send({code:1,msg:"请登录"})
+  }
+})
+//tarbar我的判断是否登录
+server.get("/mypage",(req,res)=>{
+  var uid=req.session.uid;
+  var user=req.session.user;
+  //console.log(user)
+  //console.log(req.session.uid)
+  if(uid>0){
+    res.send({code:1,data:uid,user:user})
+  }else{
+    res.send({code:0})
+  }
+})
+//合租list页面
+server.get("/rent_share",(req,res)=>{
+  var local=req.query.local;
+  //console.log(local)
+  var sql = "SELECT * FROM rent_sharing WHERE location LIKE'%'"+local;
+  pool.query(sql,(err,result)=>{
+    if(err) throw err;
+    if(result.length>0){
+      res.send({code:1,data:result})
+      //console.log(result)
+    }
+  })
+})
+
+//通过关注向关注购物车添加数据
+server.get("/insertCart",(req,res)=>{
+  var details=req.query;
+  //console.log(details);
+  var sql="INSERT INTO cart VALUES(null,?,?,?,?,?,?,?,?)"
+  pool.query(sql,[details.fid,details.img_url0,details.location,details.village,details.price,details.housetype,details.area,details.orient],(err,result)=>{
+    if(err) throw err;
+    if(result.affectedRows>0){
+      //console.log(result)
+      res.send({code:1,data:result})
+    }
+  })
+})
+//取消关注则删除购物侧中的数据
+server.get("/gdx",(req,res)=>{
+  var fid=req.query.fid
+  console.log(fid)
+  var sql="DELETE FROM cart WHERE fid=?"
+  pool.query(sql,[fid],(err,result)=>{
+    if(err) throw err;
+    if(result.affectedRows>0){
+      res.send({code:1,data:result})
+    }
+  })
+})
+
 //附近地图模块查找数据库
 server.get("/fujin",(req,res)=>{
-  var sql = "SELECT fid,price,location FROM whole_rent1";
+  var sql = "SELECT * FROM whole_rent1";
   pool.query(sql,(err,result)=>{
     if(err) throw err;
     var obj= {code:1,msg:"查询成功",data:result}
@@ -144,7 +190,6 @@ server.get("/park",(req,res)=>{
   })
 })
 //park01模块
-
 server.get("/park01",(req,res)=>{
   var sql="SELECT * FROM park WHERE pid=1";
   pool.query(sql,(err,result)=>{
@@ -154,33 +199,3 @@ server.get("/park01",(req,res)=>{
    }
   })
 }) 
-/*
-//完成第二个功能：商品分页显示
-server.get("/product",(req,res)=>{
-  //参数
-  var pno=req.query.pno;
-  var ps= req.query.pageSize;
-  //设置默认值
-  if(!pno){pno=1;}
-  if(!ps){ps=4;}
-  //常见两条sql语句执行
-  var sql="SELECT lid,title,img_url,price FROM xz_laptop LIMIT ?,?";
-  var offset=(pno-1)*ps;
-  ps= parseInt(ps);
-  pool.query(sql,[offset,ps],(err,result)=>{
-    if(err) throw err;
-    var obj = {code :1,msg:"查询成功",data:result}
-    obj.data=result;
-    var sql="SELECT count(*) AS c FROM xz_laptop";
-    pool.query(sql,(err,result)=>{
-      if(err) throw err;
-      var pc =Math.ceil(result[0].c/ps);
-      obj.pc=pc;
-      res.send(obj);
-    })
-  })
-     //嵌套完成
-  //返回值
-
-})
-*/

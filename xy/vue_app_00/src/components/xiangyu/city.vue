@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="fixed flex_between">
-            <img src="../resource/fanhui.png" @click="back">
+            <img src="../../assets/resource/fanhui.png" @click="back">
             <span class="big_font">城市</span>
             <span>  </span>
         </div>
@@ -11,7 +11,7 @@
             <div class="flex_between">
                 <div class="btn" ><span>北京</span></div>
                 <div class="flex_between">
-                    <img src="../resource/shuaxin.png">
+                    <img src="../../assets/resource/shuaxin.png">
                     <span class="lit_font local" @click="circle">重新定位</span>
                 </div>
             </div>
@@ -43,11 +43,7 @@
                var n=e.target;
                var city=n.innerHTML;
                this.localtion=document.querySelectorAll("span")[3];
-               
                this.localtion.innerHTML=city;
-                //this.$router.push("/index_title");
-                //console.log(n);
-               // console.log(this.localtion);
             },
             circle(){
                 this.image=document.querySelectorAll("img")[1];

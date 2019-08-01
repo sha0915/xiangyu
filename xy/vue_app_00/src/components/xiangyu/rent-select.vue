@@ -4,11 +4,11 @@
         <div class="rent-title">
             <!--返回，搜索，地图-->
             <div class="flex_between">
-                <img src="../resource/fanhui.png">
+                <img src="../../assets/resource/fanhui.png">
                 <div class="rent_select">
                     <span >请输入小区/商圈/地铁站等</span>
                 </div>
-                <img src="../resource/weizhi.png">
+                <img src="../../assets/resource/weizhi.png">
             </div>
             <!-- 下拉选框 -->
             <div>
@@ -37,7 +37,7 @@
         
     }
     .rent_select{
-        background:rgba(230,230,230,0.9) url("../resource/fangdajing.png") no-repeat left center;
+        background:rgba(230,230,230,0.9) url("../../assets/resource/fangdajing.png") no-repeat left center;
         border-radius:5px;
         padding:10px 70px 10px 20px;
         color:#666;

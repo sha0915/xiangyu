@@ -2,7 +2,7 @@
 <div class="park">
    <span class="title_font">相寓PARK · 集中式长租公寓</span>
    <div id="apart">
-      <div class="flats">
+      <div class="flats" v-if="list.length>0">
          <div class="canso" @click="login">
             <div>
               <mt-swipe :auto="4000" class="change">
@@ -48,8 +48,6 @@ export default {
          i:0,
       }
    },
-   components:{
-    },
    created() {
       var url="park";
       this.axios.get(url).then(result=>{

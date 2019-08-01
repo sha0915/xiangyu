@@ -4,7 +4,7 @@
    <div  style="height:150px;padding:0 10px;">
       <div id="bg" style="height:60%;padding:30px;">
          <div style="height:66%;background:#fff;padding:15px;">
-            <div class="inline on">
+            <div class="inline on" v-if="list.length>0">
                <div class="smler_font" v-text="list[i].location"></div>
                <div class="smler_font"><span style="color:red">{{list[i].price}}元/月</span>起·在租<span>9</span>套</div>
                <div class="smler_font">距您<span v-text="distance">588</span>米</div>

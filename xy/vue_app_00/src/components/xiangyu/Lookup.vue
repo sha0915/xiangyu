@@ -11,7 +11,7 @@
         <!--热门搜索-->
         <div class="flex_between lookup">
             <span class="title_font">热门搜索</span>
-            <img src="../resource/shuaxin.png">
+            <img src="../../assets/resource/shuaxin.png">
         </div>
         <!--热门内容-->
         <div class="hot_look">
@@ -20,11 +20,11 @@
             <!--历史记录-->
         <div class="flex_between history" >
             <span class="title_font">历史记录</span>
-            <img src="../resource/05.png" @click="del">
+            <img src="../../assets/resource/05.png" @click="del">
         </div>
         <!--历史内容-->
         <div class="his_del" v-for="(item,i) of history":key="i">
-            <img src="../resource/weizhi.png">
+            <img src="../../assets/resource/weizhi.png">
             <span class="lit_font" >{{item.hname}}</span>
         </div>
         

@@ -16,10 +16,6 @@
             <story></story>
          </div>
          </mt-tab-container-item>
-         <!--地图找房面板-->
-         <mt-tab-container-item id="maps">
-            2
-         </mt-tab-container-item>
          <!--业主委托面板-->
          <mt-tab-container-item id="entru">
             <yezhu></yezhu>
@@ -38,10 +34,6 @@
          <mt-tab-item id="index">
             <tabbaricon :selectedImage="require('../assets/little/index.png')" :normalImage="require('../assets/little/index2.png')"  :focused="active=='index'"></tabbaricon>
             <span>首页</span>
-         </mt-tab-item>
-         <mt-tab-item id="maps">
-            <tabbaricon :selectedImage="require('../assets/little/maps.png')" :normalImage="require('../assets/little/maps2.png')" :focused="active=='maps'"></tabbaricon>
-            <span>地图找房</span>
          </mt-tab-item>
          <mt-tab-item id="entru">
             <tabbaricon :selectedImage="require('../assets/little/entru.png')" :normalImage="require('../assets/little/entru2.png')" :focused="active=='entru'"></tabbaricon>
@@ -71,15 +63,23 @@
    import Index_title from "./xiangyu/Index_title.vue";
    import mypage from "./xiangyu/mypage.vue";
    import MessageLists from "./xiangyu/MessageLists.vue";
-   import carousel from "./xiangyu/carousel.vue";
+   import carousel from "./xiangyu/carousel.vue";   
    export default {
       data(){
          return {
             active:"index",
-            
+            session:0
          }
       },
-      methods:{       
+      methods:{   
+        passPage(){
+           var url="msg"
+            this.axios.get(url).then(result=>{
+                if(result.data.code>0){
+                    this.$router.push("/login")
+                }
+            })
+        },    
       },
       components:{
          "tabbaricon":TabBarIcon,
@@ -93,7 +93,7 @@
          "indextitle":Index_title,
          "mypage":mypage,
          "messagelists":MessageLists,
-         "carousel":carousel
+         "carousel":carousel,
       }
    }
 </script>
